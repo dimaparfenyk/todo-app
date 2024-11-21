@@ -16,4 +16,4 @@ todoRouter.put("/:id", updateToDo);
 
 todoRouter.delete("/:id", deleteToDo);
 
-module.exports = { todoRouter };
+module.exports = todoRouter;

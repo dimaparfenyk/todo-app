@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config();
 
 const { connectDB } = require("./db/todoDB");
-const { todoRouter } = require("./routes/todo.routes");
+const todoRouter = require("./routes/todo.routes");
 
 const app = express();
 
