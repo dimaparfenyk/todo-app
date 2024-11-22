@@ -8,6 +8,7 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
     <List.Item
       display={"flex"}
       alignItems={"center"}
+      p={2}
       borderBottom={"1px solid #fff"}
       transition={"all 0.3s ease"}
       _hover={{ shadow: "lg" }}

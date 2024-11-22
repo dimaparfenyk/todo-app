@@ -5,7 +5,7 @@ import TodoItem from "./TodoItem";
 import TotalTodos from "./TotalTodos";
 
 const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
-  const { todos, getAllTodos, updateToDo, deleteToDo } = useToDo();
+  const { todos, getAllTodos, updateToDo, removeTodo } = useToDo();
   const filter = useFilter((state) => state.filter);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
       {filteredTodos.length !== 0 ? (
         <List.Root
           p={10}
-          gapY={4}
+          gapY={6}
           maxW={"50%"}
           m={"0 auto"}
           borderRadius={"8px"}
@@ -50,7 +50,7 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
               key={todo._id}
               todo={todo}
               updateToDo={updateToDo}
-              deleteToDo={deleteToDo}
+              deleteToDo={removeTodo}
               setOpenEdit={setOpenEdit}
             />
           ))}
