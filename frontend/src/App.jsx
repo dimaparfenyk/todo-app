@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import NewTodo from "./components/NewTodo";
 import EditTodo from "./components/EditTodo";
 import { useState } from "react";
+import FilterButtons from "./components/FilterButtons";
 
 const App = () => {
   const [openNewTodo, setOpenNewTodo] = useState(false);
@@ -31,10 +32,12 @@ const App = () => {
           </Heading>
         </Center>
 
+        <FilterButtons />
         <TodoList
           setOpenNewTodo={setOpenNewTodo}
           setOpenEdit={handleEditTodoOpen}
         />
+
         <NewTodo open={openNewTodo} setOpen={setOpenNewTodo} />
         <EditTodo
           open={openEditTodo}

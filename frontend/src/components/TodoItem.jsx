@@ -9,6 +9,8 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
       display={"flex"}
       alignItems={"center"}
       borderBottom={"1px solid #fff"}
+      transition={"all 0.3s ease"}
+      _hover={{ shadow: "lg" }}
     >
       <Checkbox
         colorPalette={"orange"}
@@ -23,7 +25,8 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
         <Box
           as={"button"}
           p={"4px"}
-          _icon={{ w: "28px", h: "28px" }}
+          _icon={{ w: "28px", h: "28px", transition: "all 0.3s ease" }}
+          _hover={{ _icon: { fill: "orange" } }}
           onClick={() => {
             setOpenEdit(todo);
           }}
@@ -33,7 +36,8 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
         <Box
           as={"button"}
           p={"4px"}
-          _icon={{ w: "32px", h: "32px" }}
+          _icon={{ w: "32px", h: "32px", transition: "all 0.3s ease" }}
+          _hover={{ _icon: { fill: "red" } }}
           onClick={() => {
             deleteToDo(todo._id);
           }}

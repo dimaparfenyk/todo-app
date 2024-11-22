@@ -63,3 +63,9 @@ export const useToDo = create(
     },
   }))
 );
+
+export const useFilter = create((set) => ({
+  filter: "all",
+
+  setFilter: (value) => set({ filter: value }),
+}));

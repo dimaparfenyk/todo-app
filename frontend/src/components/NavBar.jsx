@@ -1,6 +1,16 @@
 import { Flex, HStack, IconButton, Image } from "@chakra-ui/react";
+import { keyframes } from "@emotion/react";
 import { FaPlus } from "react-icons/fa";
 import { ColorModeButton } from "./ui/color-mode";
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+`;
 
 export const NavBar = ({ setOpen }) => {
   return (
@@ -9,25 +19,27 @@ export const NavBar = ({ setOpen }) => {
       align={"center"}
       flexDir={{ base: "column", sm: "row" }}
     >
-      <Image src="../../public/MiniLogo.png" />
+      <Image
+        src="../../public/MiniLogo.png"
+        _hover={{
+          animation: `${rotate360} 0.5s ease`,
+        }}
+      />
       <Flex gapX={4}>
         <HStack spacing={2} alignItems={"center"}>
-          <ColorModeButton
-            bg={{ base: "#1AB8DB", _dark: "white" }}
-            _hover={{ bg: "#1aa0db" }}
-          />
+          <ColorModeButton transition={"all 0.4s ease"} />
           <IconButton
-            bg={{ base: "#1AB8DB", _dark: "white" }}
+            colorPalette="cyan"
             w={12}
             h={12}
             px={4}
-            _hover={{ bg: "#1aa0db" }}
+            transition={"all 0.4s ease"}
             css={{
               _icon: {
                 width: "5",
                 height: "5",
-                fill: { base: "#fff", _dark: "gray.600" },
-                stroke: { base: "#fff", _dark: "gray.600" },
+                fill: "#fff",
+                stroke: "#fff",
               },
             }}
             onClick={() => setOpen(true)}

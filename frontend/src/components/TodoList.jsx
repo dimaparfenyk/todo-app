@@ -1,13 +1,12 @@
-import { useEffect } from "react";
-import { useToDo } from "../store/store";
+import { useEffect, useMemo } from "react";
+import { useFilter, useToDo } from "../store/store";
 import { List, Text, Box } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";
+import TotalTodos from "./TotalTodos";
 
 const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
-  const todos = useToDo((state) => state.todos);
-  const getAllTodos = useToDo((state) => state.getAllTodos);
-  const updateToDo = useToDo((state) => state.updateToDo);
-  const deleteToDo = useToDo((state) => state.removeTodo);
+  const { todos, getAllTodos, updateToDo, deleteToDo } = useToDo();
+  const filter = useFilter((state) => state.filter);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -20,20 +19,33 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
     fetchTodos();
   }, [getAllTodos]);
 
+  const filteredTodos = useMemo(() => {
+    switch (filter) {
+      case "completed":
+        return todos.filter((todo) => todo.completed);
+      case "not completed":
+        return todos.filter((todo) => !todo.completed);
+
+      default:
+        return todos;
+    }
+  }, [filter, todos]);
+
   return (
     <>
-      {todos.length !== 0 ? (
+      <TotalTodos todos={filteredTodos} />
+      {filteredTodos.length !== 0 ? (
         <List.Root
           p={10}
           gapY={4}
           maxW={"50%"}
           m={"0 auto"}
           borderRadius={"8px"}
-          bg={"teal.700"}
+          bg={"teal"}
           color={"#fff"}
           boxShadow={"7px 7px 27px 6px rgba(0,0,0,0.36)"}
         >
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <TodoItem
               key={todo._id}
               todo={todo}
