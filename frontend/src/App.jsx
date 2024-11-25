@@ -1,4 +1,4 @@
-import { Center, Container, Heading } from "@chakra-ui/react";
+import { Center, Container, Flex, Heading } from "@chakra-ui/react";
 import TodoList from "./components/TodoList";
 import Header from "./components/Header";
 import NewTodo from "./components/NewTodo";
@@ -17,14 +17,14 @@ const App = () => {
   };
 
   return (
-    <>
+    <Flex display="flex" minH="100vh" direction="column">
       <Header setOpen={setOpenNewTodo} />
       <Container
         maxW="container.xl"
         py={12}
         w={"100vw"}
-        h={"100vh"}
-        bg={{ base: "#fdfdfd", _dark: "#7a7a7a" }}
+        flex={"1"}
+        bg={{ _dark: "#3b3b3b" }}
       >
         <Center marginBottom={"20px"}>
           <Heading as={"h1"} textStyle={"3xl"}>
@@ -45,7 +45,7 @@ const App = () => {
           todo={currentTodo}
         />
       </Container>
-    </>
+    </Flex>
   );
 };
 

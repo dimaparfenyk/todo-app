@@ -13,6 +13,12 @@ const getAllToDo = async (req, res) => {
 const createNewToDo = async (req, res) => {
   const todo = req.body;
 
+  if (!todo.title) {
+    return res
+      .status(400)
+      .json({ succsess: false, message: "Title field is required." });
+  }
+
   try {
     const result = await Todo.create({ ...todo });
     res.status(201).json({ success: true, data: result });
@@ -34,6 +40,7 @@ const updateToDo = async (req, res) => {
     const updatedToDo = await Todo.findByIdAndUpdate(id, req.body, {
       new: true,
     });
+
     res.status(200).json({
       success: true,
       message: "ToDo updated successfully",

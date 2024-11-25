@@ -3,6 +3,7 @@ import { useFilter, useToDo } from "../store/store";
 import { List, Text, Box } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";
 import TotalTodos from "./TotalTodos";
+import { toaster, Toaster } from "./ui/toaster";
 
 const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
   const { todos, getAllTodos, updateToDo, removeTodo } = useToDo();
@@ -25,11 +26,15 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
         return todos.filter((todo) => todo.completed);
       case "not completed":
         return todos.filter((todo) => !todo.completed);
-
       default:
         return todos;
     }
   }, [filter, todos]);
+
+  const handleRemoveTodo = (id) => {
+    removeTodo(id);
+    toaster.create({ title: "Todo deleted successfully.", type: "success" });
+  };
 
   return (
     <>
@@ -50,7 +55,9 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
               key={todo._id}
               todo={todo}
               updateToDo={updateToDo}
-              deleteToDo={removeTodo}
+              deleteToDo={() => {
+                handleRemoveTodo(todo._id);
+              }}
               setOpenEdit={setOpenEdit}
             />
           ))}
@@ -63,7 +70,7 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
           color={{ base: "#141414", _dark: "#fff" }}
           letterSpacing={"0.1em"}
         >
-          No products found 😢{" "}
+          No todos found 😢{" "}
           <Box as={"button"} onClick={() => setOpenNewTodo(true)}>
             <Text
               as="span"
@@ -75,6 +82,7 @@ const TodoList = ({ setOpenNewTodo, setOpenEdit }) => {
           </Box>
         </Text>
       )}
+      <Toaster />
     </>
   );
 };

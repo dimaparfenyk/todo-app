@@ -12,6 +12,14 @@ export const useToDo = create(
     },
 
     addTodo: async (newTodo) => {
+      if (!newTodo.title) {
+        return { success: false, message: "Title field is required." };
+      }
+
+      // if (newTodo.link && !isValidUrl(newTodo.link)) {
+      //   return { success: false, message: "Invalid URL." };
+      // }
+
       const res = await fetch("/api/todos", {
         method: "POST",
         headers: {
@@ -51,11 +59,9 @@ export const useToDo = create(
       });
       const { data, message } = await res.json();
 
-      const updatedToDo = { ...data, completed: data.completed };
-
       set((state) => ({
         todos: state.todos.map((todo) =>
-          todo._id === todoId ? updatedToDo : todo
+          todo._id === todoId ? { ...todo, ...data } : todo
         ),
       }));
 

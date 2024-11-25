@@ -1,7 +1,8 @@
-import { Box, HStack, List, Text } from "@chakra-ui/react";
+import { Box, HStack, Link, List, Text } from "@chakra-ui/react";
 import { Checkbox } from "./ui/checkbox";
 import { TiDelete } from "react-icons/ti";
 import { FaRegEdit } from "react-icons/fa";
+import { LuExternalLink } from "react-icons/lu";
 
 const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
   return (
@@ -16,16 +17,30 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
       <Checkbox
         colorPalette={"orange"}
         defaultChecked={todo.completed}
+        cursor={"pointer"}
         onChange={() => {
           updateToDo(todo._id, { completed: !todo.completed });
         }}
       >
-        <Text fontSize={"18px"}>{todo.title}</Text>
+        {todo.link ? (
+          <Link
+            href={todo.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant={"underline"}
+            fontSize={"18px"}
+          >
+            {todo.title} <LuExternalLink />
+          </Link>
+        ) : (
+          <Text fontSize={"18px"}>{todo.title}</Text>
+        )}
       </Checkbox>
       <HStack marginLeft={"auto"} gapX={4}>
         <Box
           as={"button"}
           p={"4px"}
+          cursor={"pointer"}
           _icon={{ w: "28px", h: "28px", transition: "all 0.3s ease" }}
           _hover={{ _icon: { fill: "orange" } }}
           onClick={() => {
@@ -37,6 +52,7 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
         <Box
           as={"button"}
           p={"4px"}
+          cursor={"pointer"}
           _icon={{ w: "32px", h: "32px", transition: "all 0.3s ease" }}
           _hover={{ _icon: { fill: "red" } }}
           onClick={() => {
