@@ -3,8 +3,7 @@ const { MONGO_KEY } = process.env;
 
 const connectDB = async () => {
   try {
-    const connect = await mongoose.connect(MONGO_KEY);
-    console.log(`MongoDB Connected: ${connect.connection.host}`);
+    await mongoose.connect(MONGO_KEY);
   } catch (error) {
     console.error("Error:", error.message);
   }

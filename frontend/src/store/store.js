@@ -16,10 +16,6 @@ export const useToDo = create(
         return { success: false, message: "Title field is required." };
       }
 
-      // if (newTodo.link && !isValidUrl(newTodo.link)) {
-      //   return { success: false, message: "Invalid URL." };
-      // }
-
       const res = await fetch("/api/todos", {
         method: "POST",
         headers: {

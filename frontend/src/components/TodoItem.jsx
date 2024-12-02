@@ -29,6 +29,7 @@ const TodoItem = ({ todo, updateToDo, deleteToDo, setOpenEdit }) => {
             rel="noopener noreferrer"
             variant={"underline"}
             fontSize={"18px"}
+            color={"#fff"}
           >
             {todo.title} <LuExternalLink />
           </Link>
